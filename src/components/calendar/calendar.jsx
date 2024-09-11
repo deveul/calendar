@@ -66,7 +66,7 @@ const Calendar = () => {
     setFirstDay(nextWeekStart);
   };
 
-  return days ? (
+  return (
     <div className="flex items-start justify-center">
       <button
         onClick={getPrevWeek}
@@ -83,8 +83,6 @@ const Calendar = () => {
         <ChevronRightIcon />
       </button>
     </div>
-  ) : (
-    <></>
   );
 };
 
