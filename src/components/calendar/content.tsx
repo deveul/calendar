@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
+import { Day } from "../../types/types";
 import CalendarContentCell from "./content-cell";
 
-const CalendarContent = ({ days }) => {
+const CalendarContent = ({ days }: { days: Day[] }) => {
   return (
     <tbody>
       {Array.from({ length: 10 }).map((_, rowIndex) => (
@@ -17,10 +17,6 @@ const CalendarContent = ({ days }) => {
       ))}
     </tbody>
   );
-};
-
-CalendarContent.propTypes = {
-  days: PropTypes.array,
 };
 
 export default CalendarContent;

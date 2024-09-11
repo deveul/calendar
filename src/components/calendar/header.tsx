@@ -1,10 +1,10 @@
-import PropTypes from "prop-types";
+import { Day } from "../../types/types";
 
-const CalendarHeader = ({ days }) => {
-  const optionsWeekDay = {
+const CalendarHeader = ({ days }: { days: Day[] }) => {
+  const optionsWeekDay: Intl.DateTimeFormatOptions = {
     weekday: "short",
   };
-  const optionsDate = {
+  const optionsDate: Intl.DateTimeFormatOptions = {
     day: "numeric",
     month: "short",
   };
@@ -14,7 +14,7 @@ const CalendarHeader = ({ days }) => {
       <tr>
         {days.map((day) => {
           return (
-            <th key={day.date}>
+            <th key={day.date.getTime()}>
               <div className="flex flex-col p-4 items-center w-32">
                 <p className="font-normal">
                   {day.date
@@ -33,10 +33,6 @@ const CalendarHeader = ({ days }) => {
       </tr>
     </thead>
   );
-};
-
-CalendarHeader.propTypes = {
-  days: PropTypes.array,
 };
 
 export default CalendarHeader;

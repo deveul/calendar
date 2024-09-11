@@ -1,11 +1,17 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { Day } from "../../types/types";
 
-const CalendarContentCell = ({ day, rowIndex }) => {
+const CalendarContentCell = ({
+  day,
+  rowIndex,
+}: {
+  day: Day;
+  rowIndex: number;
+}) => {
   const startTime = day.slots[rowIndex]?.startTime;
   const [colorCounter, setColorCounter] = useState(0);
-  const optionsNumericTime = {
+  const optionsNumericTime: Intl.DateTimeFormatOptions = {
     hour: "2-digit",
     minute: "2-digit",
   };
@@ -38,11 +44,6 @@ const CalendarContentCell = ({ day, rowIndex }) => {
       </div>
     </td>
   );
-};
-
-CalendarContentCell.propTypes = {
-  day: PropTypes.object,
-  rowIndex: PropTypes.number,
 };
 
 export default CalendarContentCell;

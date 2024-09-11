@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import CalendarHeader from "./header";
-import ChevronLeftIcon from "../../assets/icons/chevron-left";
-import ChevronRightIcon from "../../assets/icons/chevron-right";
 import { getRndInteger } from "../../utils/math";
+import ChevronLeftIcon from "../../assets/icons/chevron-left";
 import CalendarContent from "./content";
+import ChevronRightIcon from "../../assets/icons/chevron-right";
+import { Day, Slot } from "../../types/types";
 
-const sortAndRemoveDuplicateSlots = (slots) => {
+const sortAndRemoveDuplicateSlots = (slots: Slot[]) => {
   const startTimes = new Set();
   const filteredSlots = slots.filter((slot) => {
     const slotTime = slot.startTime.getTime();
@@ -16,10 +17,12 @@ const sortAndRemoveDuplicateSlots = (slots) => {
     startTimes.add(slotTime);
     return true;
   });
-  return filteredSlots.sort((a, b) => a.startTime - b.startTime);
+  return filteredSlots.sort(
+    (a, b) => a.startTime.getTime() - b.startTime.getTime()
+  );
 };
 
-const createSlotsPerDay = (date) => {
+const createSlotsPerDay = (date: Date) => {
   const numbersOfSlots = getRndInteger(1, 11);
   const slots = [];
   for (let i = 0; i < numbersOfSlots; i++) {
@@ -35,7 +38,7 @@ const createSlotsPerDay = (date) => {
   return sortAndRemoveDuplicateSlots(slots);
 };
 
-const createDays = (firstDay) => {
+const createDays = (firstDay: Date) => {
   const days = [];
   for (let i = 0; i < 7; i++) {
     const currentDay = new Date(firstDay);
@@ -48,7 +51,7 @@ const createDays = (firstDay) => {
 const Calendar = () => {
   const today = new Date();
   const [firstDay, setFirstDay] = useState(today);
-  const [days, setDays] = useState([]);
+  const [days, setDays] = useState<Day[]>([]);
 
   useEffect(() => {
     setDays(createDays(firstDay));
